@@ -1,8 +1,7 @@
 {
     "baseUrl": "",
-    "ignoreTestFiles": "**/examples",
+    "ignoreTestFiles": "",
     "testFiles": "*/.{feature,features}",
-    "testFilesw": "**/*spec.{js,jsx,ts,tsx}",
     "viewportHeight": 768,
     "viewportWidth": 1024,
     "video": false,
