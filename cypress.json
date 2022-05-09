@@ -1,0 +1,14 @@
+{
+    "baseUrl": "",
+    "ignoreTestFiles": "**/examples",
+    "testFiles": "*/.{feature,features}",
+    "testFilesw": "**/*spec.{js,jsx,ts,tsx}",
+    "viewportHeight": 768,
+    "viewportWidth": 1024,
+    "video": false,
+    "theme": "dark",
+    "retries": {
+        "runMode": 2,
+        "openMode": 2
+    }
+}
