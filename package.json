@@ -1,0 +1,29 @@
+{
+  "name": "sqa-challenge-fabianportilloglez",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wizeline/sqa-challenge-fabianportilloglez.git"
+  },
+  "keywords": [
+    "Cypress",
+    "automation",
+    "BDD",
+    "POM"
+  ],
+  "author": "Fabian Portillo Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wizeline/sqa-challenge-fabianportilloglez/issues"
+  },
+  "homepage": "https://github.com/wizeline/sqa-challenge-fabianportilloglez#readme",
+  "devDependencies": {
+    "cypress": "^9.6.0",
+    "eslint": "^8.15.0"
+  }
+}
