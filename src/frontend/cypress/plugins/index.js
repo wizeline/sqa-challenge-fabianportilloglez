@@ -1,11 +1,9 @@
-/// <reference types="cypress" />
+const dotenvPlugin = require('cypress-dotenv');
+const cucumber = require('cypress-cucumber-preprocessor').default
 
-/**
- * @type {Cypress.PluginConfig}
- */
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())  
+  config = dotenvPlugin(config)
 
- const cucumber = require('cypress-cucumber-preprocessor').default
-
- module.exports = (on, config) => {
-   on('file:preprocessor', cucumber())
- } 
+  return config;
+}

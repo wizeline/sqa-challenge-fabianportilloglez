@@ -1,6 +1,18 @@
 # dependencies
 /node_modules
+package-lock.json
 
 # system files
 .DS_STORE
 Thumbs.db
+.project
+.vscode
+
+.idea/
+
+# env variables
+.env
+
+# testing
+src/cypress/screenshots/
+src/cypress/reports
