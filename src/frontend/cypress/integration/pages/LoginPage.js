@@ -12,7 +12,7 @@ static visitLoginPage() {
   cy.contains('Log in').click();
 }
 
-static fillUsername() {
+/* static fillUsername() {
   cy.get('.form-control')
     .clear()
     .type('fabian.portillo@wizeline.com')
@@ -32,7 +32,7 @@ static clickLoginButton() {
 
 static visitMyNotesPage() {
   cy.contains('My Notes')
-}
+} */
 
 }
 
