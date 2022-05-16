@@ -1,11 +1,11 @@
-/// <reference types="cypress" />
+const reporter = require('cypress-mochawesome-reporter/plugin');
+const cucumber = require('cypress-cucumber-preprocessor').default
+const dotenvPlugin = require('cypress-dotenv');
 
-/**
- * @type {Cypress.PluginConfig}
- */
+module.exports = (on, config) => {
+  rep = reporter(on);
+  on('file:preprocessor', cucumber())  
+  config = dotenvPlugin(config)
 
- const cucumber = require('cypress-cucumber-preprocessor').default
-
- module.exports = (on, config) => {
-   on('file:preprocessor', cucumber())
- } 
+  return config;
+}

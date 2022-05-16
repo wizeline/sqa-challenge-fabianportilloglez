@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "cy:open": "npx cypress open",
+      "cy:run": "npx cypress run",
+      "cy:run chrome": "npx cypress run --browser chrome",
+      "cy:run firefox": "npx cypress run --browser firefox"
+    }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wizeline/sqa-challenge-fabianportilloglez.git"
@@ -23,7 +27,20 @@
   },
   "homepage": "https://github.com/wizeline/sqa-challenge-fabianportilloglez#readme",
   "devDependencies": {
-    "cypress": "^9.6.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-dotenv": "^2.0.0",
+    "cypress-mochawesome-reporter": "^3.1.0",
+    "dotenv": "^16.0.1",
     "eslint": "^8.15.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+  "dependencies": {
+    "browserstack": "^1.6.1",
+    "cli": "^1.0.1",
+    "cypress": "^9.6.1",
+    "g": "^2.0.1",
+    "newman-reporter-teamcity": "^0.1.12"
   }
 }

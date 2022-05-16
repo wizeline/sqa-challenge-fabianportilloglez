@@ -1,13 +1,8 @@
 {
-    "baseUrl": "",
-    "ignoreTestFiles": "",
+    "baseUrl": "https://todoist.com/",
     "testFiles": "*/.{feature,features}",
+    "ignoreTestFiles": "**/*spec.{js,jsx,ts,tsx}",
     "viewportHeight": 768,
     "viewportWidth": 1024,
-    "video": false,
-    "theme": "dark",
-    "retries": {
-        "runMode": 2,
-        "openMode": 2
-    }
+    "video": false
 }
