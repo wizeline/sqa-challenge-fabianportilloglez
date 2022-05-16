@@ -28,6 +28,7 @@ ___
 <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/marketing-view-5378755-4492993.png" alt="Browserstack" height="40" width="40" style="vertical-align:top; margin:4px"> <!-- Browserstack -->
 <img src="https://rtfm.co.ua/wp-content/uploads/2019/06/sonarqube-logo.png" alt="SonarQube" height="40" width="40" style="vertical-align:top; margin:4px"> <!-- SonarQube -->
 </p>
+
 ___
 
 ## **Collaborators:** 
