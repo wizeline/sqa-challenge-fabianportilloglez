@@ -1,7 +1,7 @@
 // Declarative //
 pipeline {
     agent any
-    tools { nodejs 'node' }
+    tools { nodejs 'nodeJS-SQA' }
     stages {
         stage('Dependencies') {
             steps {
