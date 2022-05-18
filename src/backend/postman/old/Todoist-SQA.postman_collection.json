@@ -1,0 +1,1187 @@
+{
+	"info": {
+		"_postman_id": "2e996b81-d422-4130-b864-6083a1984108",
+		"name": "Todoist-SQA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "projects",
+			"item": [
+				{
+					"name": "getAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'projects'",
+									"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Content-Type header is application/json\", () => {",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"Body is not empty\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"",
+									"pm.test(\"Fail because Body is not empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Fail because status expected 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields doesn't match\", () => {",
+									"    pm.response.to.have.header('content-type', 'text/plain');  ",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.not.be.json;",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL-todoist}}/projects",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'projects'",
+									"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Content-Type header is application/json\", () => {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"Body is not empty\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"The response of project created contains all properties and the values match\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    //pm.expect(responseJson.id).to.eql('2203306007');",
+									"    pm.expect(responseJson.name).to.eql('New project SQA challenge Fabian');",
+									"    pm.expect(responseJson.comment_count).to.eql(0);",
+									"    pm.expect(responseJson.color).to.eql(40);",
+									"    pm.expect(responseJson.shared).to.eql(false);",
+									"    pm.expect(responseJson.sync_id).to.eql(0);",
+									"    pm.expect(responseJson.order).to.eql(3);",
+									"    pm.expect(responseJson.favorite).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"The response fields for project contain correct data type\", () => {",
+									"    //parse the response JSON and test three properties",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.name).to.be.a(\"string\");",
+									"    pm.expect(jsonData.comment_count).to.be.a(\"number\");",
+									"    pm.expect(jsonData.color).to.be.a(\"number\");",
+									"    pm.expect(jsonData.shared).to.be.a(\"boolean\");",
+									"    pm.expect(jsonData.sync_id).to.be.a(\"number\");",
+									"    pm.expect(jsonData.order).to.be.a(\"number\");",
+									"    pm.expect(jsonData.favorite).to.be.a(\"boolean\");",
+									"    pm.expect(jsonData.url).to.be.not.null;",
+									"});",
+									"",
+									"//parse the value of the \"id\" field into a collection variable ",
+									"const jsonResponse = pm.response.json();",
+									"pm.environment.set(\"project_id\", jsonResponse.id);",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because body response does not match string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    pm.expect(pm.response.text()).to.include(\"order\");",
+									"    pm.expect(pm.response.text()).to.include(\"color\");",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    pm.expect(pm.response.text()).to.include(\"comment_count\");",
+									"    pm.expect(pm.response.text()).to.include(\"favorite\");",
+									"    pm.expect(pm.response.text()).to.include(\"sync_id\");",
+									"    pm.expect(pm.response.text()).to.include(\"CHEATER-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because headers response does not match string\", () => {",
+									"   pm.expect(pm.response).to.have.header(\"Content-Type\", \"this is not a type of Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.not.be.json;",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/projects",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current collection 'projects'",
+									"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Content-Type header is application/json\", () => {",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"Body is not empty\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because the content of response body of get method does not match\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.name).to.eql('This content of task it does not match with original');",
+									"    pm.expect(responseJson.favorite).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Fail because field data types are invalid\", () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.be.a(\"number\");",
+									"    pm.expect(jsonData.color).to.be.a(\"string\");",
+									"    pm.expect(jsonData.order).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Fail because the field 'color' does not match with valid options\", () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.color).to.eql(156);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.not.be.json;",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/projects/{{project_id}}",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"projects",
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'projects'",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Status code is 204 'No Content'\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because headers response does not match string\", () => {",
+									"   pm.expect(pm.response).to.have.header(\"Content-Type\", \"this is not a type of Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/projects/{{project_id}}",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"projects",
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'projects'",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Status code is 204 'No Content'\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/projects/{{project_id}}",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"projects",
+								"{{project_id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "tasks",
+			"item": [
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'tasks'",
+									"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Content-Type header is application/json\", () => {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"Body is not empty\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"The requested task contains all properties and the values match\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.content).to.eql(\"Created task for SQA Challenge Fabian\");",
+									"    pm.expect(responseJson.description).to.eql(\"This is a task created after running POST request using Postman for SQA Challenge\");",
+									"    pm.expect(responseJson.completed).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"The response fields for requested task contain correct data types\", () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.content).to.be.a(\"string\");",
+									"    pm.expect(jsonData.description).to.be.a(\"string\");",
+									"    pm.expect(jsonData.completed).to.be.a(\"boolean\");",
+									"});",
+									"",
+									"//parse the value of the \"id\" field into a collection variable ",
+									"const jsonResponse = pm.response.json();",
+									"pm.collectionVariables.set(\"task_id\", jsonResponse.id);",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because body response does not match string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"completed\");",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"    pm.expect(pm.response.text()).to.include(\"CHEATER-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because headers response does not match string\", () => {",
+									"   pm.expect(pm.response).to.have.header(\"Content-Type\", \"this is not a type of Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.not.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Created task for SQA Challenge Fabian\",\n    \"description\": \"This is a task created after running POST request using Postman for SQA Challenge\",\n    \"completed\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/tasks",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'projects'",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Status code is 204 'No Content'\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because headers response does not match string\", () => {",
+									"   pm.expect(pm.response).to.have.header(\"Content-Type\", \"this is not a type of Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Updated task for SQA Challenge Fabian\",\n    \"completed\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'projects'",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Status code is 204 'No Content'\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "close",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'tasks'",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Status code is 204 'No Content'\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Warning:⚠️⚠️ 404 because Task not found' to close\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because headers response does not match string\", () => {",
+									"   pm.expect(pm.response).to.have.header(\"Content-Type\", \"this is not a type of Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/tasks/{{task_id}}/close",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reopen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'tasks'",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Status code is 204 'No Content'\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Warning:⚠️⚠️ 404 because Task not found' to reopen\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Body is empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"pm.test(\"Fail because status expected 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Fail because headers response does not match string\", () => {",
+									"   pm.expect(pm.response).to.have.header(\"Content-Type\", \"text/html;\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL-todoist}}/tasks/{{task_id}}/reopen",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}",
+								"reopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllActive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'tasks'",
+									"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Content-Type header is application/json\", () => {",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"",
+									"pm.test(\"Fail because Body is not empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Fail because status expected 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.not.be.json;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL-todoist}}/tasks",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOneActive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Success tests (must pass)",
+									" */",
+									"//The definition of these tests are in pre-request of current folder 'tasks'",
+									"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+									"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+									"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+									"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+									"",
+									"pm.test(\"Content-Type header is application/json\", () => {",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"The requested task contains all properties and the values match\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.content).to.eql(\"Select this task to see more details 🔎\");",
+									"    pm.expect(responseJson.description).to.eql(\"Quick notes and links can go here — and files in the comments tab below.👇\");",
+									"    pm.expect(responseJson.completed).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"The response fields for requested task contain correct data types\", () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.order).to.be.a(\"number\");",
+									"    pm.expect(jsonData.content).to.be.a(\"string\");",
+									"    pm.expect(jsonData.description).to.be.a(\"string\");",
+									"    pm.expect(jsonData.completed).to.be.a(\"boolean\");",
+									"});",
+									"",
+									"/**",
+									" * Failed tests (must fail)",
+									" */",
+									"",
+									"pm.test(\"Fail because Body is not empty\", function () {",
+									"    pm.response.to.not.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Fail because the content of response body of get method does not match\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.content).to.eql('This content of task it does not match with original');",
+									"    pm.expect(responseJson.description).to.eql('This description of task it does not match with original');",
+									"    pm.expect(responseJson.completed).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Fail because field data types are invalid\", () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.content).to.be.a(\"number\");",
+									"    pm.expect(jsonData.order).to.be.a(\"string\");",
+									"    pm.expect(jsonData.completed).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Fail because the field 'url' does not match with valid options\", () => {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.url).to.eql('https://todoist.com/fakeURL');",
+									"});",
+									"",
+									"pm.test(\"Fail because status expected 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Fail because expected headers fields don't exist\", () => {",
+									"    pm.response.to.have.header(\"Year\");",
+									"    pm.response.to.have.header(\"Cheater-field\");",
+									"});",
+									"",
+									"pm.test(\"Fail because expected response type of json\", () => {",
+									"    pm.response.to.not.be.json;",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+							"host": [
+								"{{URL-todoist}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//test 1",
+							"let validateSuccessResponse = () => {",
+							"    pm.test(\"Response 'OK' and status 200\", function () {",
+							"        pm.response.to.have.status(200);",
+							"        pm.response.to.be.ok;",
+							"    });",
+							"}",
+							"",
+							"//test 2",
+							"let validateEnvironment = () => {",
+							"    pm.test(\"The active environment is equal to 'todoist'\", () => {",
+							"        pm.expect(pm.environment.name).to.eql(\"todoist\");",
+							"    });",
+							"};",
+							"",
+							"//test 3",
+							"pm.environment.get(\"auth-token\");",
+							"let validateAuthentication = () => {",
+							"    pm.test(\"Check wether it is authenticated request\", function () {",
+							"        pm.sendRequest({",
+							"            url: 'https://api.todoist.com/rest/v1/projects',",
+							"            method: 'GET',",
+							"            header: {",
+							"                'Authorization':  'Bearer ' + '{{auth-token}}'",
+							"            },",
+							"        })",
+							"    });",
+							"}",
+							"",
+							"//test 4",
+							"let validateResponseTime = () => {",
+							"    pm.test(\"Response time is less than 300ms\", function () {",
+							"        pm.expect(pm.response.responseTime).to.be.below(300);",
+							"    });",
+							"}",
+							"",
+							"//Definition of environment variables",
+							"pm.environment.set(\"validateSuccessResponse\", validateSuccessResponse.toString());",
+							"pm.environment.set(\"validateEnvironment\", validateEnvironment.toString());",
+							"pm.environment.set(\"validateAuthentication\", validateAuthentication.toString());",
+							"pm.environment.set(\"validateResponseTime\", validateResponseTime.toString());"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//test 1",
+					"let validateSuccessResponse = () => {",
+					"    pm.test(\"Response 'OK' and status 200\", function () {",
+					"        pm.response.to.have.status(200);",
+					"        pm.response.to.be.ok;",
+					"    });",
+					"}",
+					"",
+					"//test 2",
+					"let validateEnvironment = () => {",
+					"    pm.test(\"The active environment is equal to 'todoist'\", () => {",
+					"        pm.expect(pm.environment.name).to.eql(\"todoist\");",
+					"    });",
+					"};",
+					"",
+					"//test 3",
+					"//let token = pm.environment.get(\"auth-token\");",
+					"let validateAuthentication = () => {",
+					"    pm.test(\"The authorization token is not null and is defined'\", () => {",
+					"            if(`${pm.environment.get(\"auth-token\")}` !== null || `${pm.environment.get(\"auth-token\")}` !== undefined) {",
+					"                console.log('success');",
+					"            } ",
+					"    });",
+					"};",
+					"//TODO: Investigate how to sabe the variable token and put in test",
+					"",
+					"//test 4",
+					"let validateResponseTime = () => {",
+					"    pm.test(\"Response time is less than 300ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(300);",
+					"    });",
+					"}",
+					"",
+					"//Definition of collection variables",
+					"pm.collectionVariables.set(\"validateSuccessResponse\", validateSuccessResponse.toString());",
+					"pm.collectionVariables.set(\"validateEnvironment\", validateEnvironment.toString());",
+					"pm.collectionVariables.set(\"validateAuthentication\", validateAuthentication.toString());",
+					"pm.collectionVariables.set(\"validateResponseTime\", validateResponseTime.toString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "project_id",
+			"value": ""
+		},
+		{
+			"key": "project_id_updt",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "validateSuccessResponse",
+			"value": ""
+		},
+		{
+			"key": "validateEnvironment",
+			"value": ""
+		},
+		{
+			"key": "validateAuthentication",
+			"value": ""
+		},
+		{
+			"key": "validateResponseTime",
+			"value": ""
+		},
+		{
+			"key": "randomInt",
+			"value": ""
+		},
+		{
+			"key": "randomFirstName",
+			"value": ""
+		},
+		{
+			"key": "task_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "task_id_updt",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

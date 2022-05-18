@@ -1,0 +1,2228 @@
+{
+	"info": {
+		"_postman_id": "3bf0e8d6-e9ed-47e1-9c1a-37143c13c0ac",
+		"name": "todoist-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "positive tests",
+					"item": [
+						{
+							"name": "get",
+							"item": [
+								{
+									"name": "'get' all",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'projects'",
+													"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Content-Type header is application/json\", () => {",
+													"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+													"});",
+													"",
+													"pm.test(\"Body is not empty\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/projects",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current collection 'projects'",
+													"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Content-Type header is application/json\", () => {",
+													"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+													"});",
+													"",
+													"pm.test(\"Body is not empty\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "post",
+							"item": [
+								{
+									"name": "'create' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'projects'",
+													"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Content-Type header is application/json\", () => {",
+													"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+													"});",
+													"",
+													"pm.test(\"Body is not empty\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});",
+													"",
+													"pm.test(\"The response of project created contains all properties and the values match\", () => {",
+													"    const responseJson = pm.response.json();",
+													"    //pm.expect(responseJson.id).to.eql('2203306007');",
+													"    pm.expect(responseJson.name).to.eql('New project SQA challenge Fabian');",
+													"    pm.expect(responseJson.comment_count).to.eql(0);",
+													"    pm.expect(responseJson.color).to.eql(40);",
+													"    pm.expect(responseJson.shared).to.eql(false);",
+													"    pm.expect(responseJson.sync_id).to.eql(0);",
+													"    pm.expect(responseJson.order).to.eql(3);",
+													"    pm.expect(responseJson.favorite).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"The response fields for project contain correct data type\", () => {",
+													"    //parse the response JSON and test three properties",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData).to.be.an(\"object\");",
+													"    pm.expect(jsonData.name).to.be.a(\"string\");",
+													"    pm.expect(jsonData.comment_count).to.be.a(\"number\");",
+													"    pm.expect(jsonData.color).to.be.a(\"number\");",
+													"    pm.expect(jsonData.shared).to.be.a(\"boolean\");",
+													"    pm.expect(jsonData.sync_id).to.be.a(\"number\");",
+													"    pm.expect(jsonData.order).to.be.a(\"number\");",
+													"    pm.expect(jsonData.favorite).to.be.a(\"boolean\");",
+													"    pm.expect(jsonData.url).to.be.not.null;",
+													"});",
+													"",
+													"//parse the value of the \"id\" field into a collection variable ",
+													"const jsonResponse = pm.response.json();",
+													"pm.environment.set(\"project_id\", jsonResponse.id);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'projects'",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Status code is 204 'No Content'\", () => {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													"pm.test(\"Body is empty\", () => {",
+													"    pm.response.to.not.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"item": [
+								{
+									"name": "'delete' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'projects'",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Status code is 204 'No Content'\", () =>{",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													"pm.test(\"Body is empty\", () => {",
+													"    pm.response.to.not.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id}}"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "negative tests",
+					"item": [
+						{
+							"name": "get",
+							"item": [
+								{
+									"name": "'get' all with invalid request for project id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'404' status code 'Not Found'\", () => {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"pm.test(\"404 Message is displayed in response\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Not found\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/nvalid939kl#$@",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"nvalid939kl"
+											],
+											"hash": "$@"
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' one sending 'body' response as bad request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'403' status code 'Forbidden'\", () => {",
+													"    pm.response.to.have.status(403);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "dklndklndkln\n480y40948yfi'3fn3\n\nfk;n4klvn34k\nINVALID REQUEST"
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/123",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"123"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' all with 'No Auth' access",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'401' status code 'Unauthorized'\", () => {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{task_id_this_is_invalid}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{task_id_this_is_invalid}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' one with an invalid project id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'404' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Not found' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Not found\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/123d333$$$##",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"123d333$$$"
+											],
+											"hash": "#"
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "post",
+							"item": [
+								{
+									"name": "'create' one with invalid 'body' format",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n},\n{}DLD;LM;L\nCKQWNC\nDKCNWLKRNC\n3983938983",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one with invalid 'body' format",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n},\n{DKLMKLDMKLD\n48891Y8Y2\n4R124 43 []}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one with invalid project id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request''\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'task_id is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"project_id is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id';,d'd,_INVALID}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id';,d'd,_INVALID}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'create' one with 'No Auth' access",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'401' status code 'Unauthorized'\", () => {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one task id that does not exist",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n},\n{DKLMKLDMKLD\n48891Y8Y2\n4R124 43 []}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/D;LMD;LMD",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"D;LMD;LMD"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"item": [
+								{
+									"name": "'delete' one with an invalid task id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Task is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"project_id is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id_48933ynddj_INVALID}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id_48933ynddj_INVALID}}"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'delete' one with 'body' response",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "c,';we,v';$R\n\n4xrf34f2f💕❤️😂8😂😏😁😂😏x\nl;ml;lm;",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/projects/{{project_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"projects",
+												"{{project_id}}"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "positive tests",
+					"item": [
+						{
+							"name": "get",
+							"item": [
+								{
+									"name": "'get' one that is active",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'tasks'",
+													"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"/* pm.test(\"The requested task contains all properties and the values match\", () => {",
+													"    const responseJson = pm.response.json();",
+													"    pm.expect(responseJson.content).to.eql(\"Select this task to see more details 🔎\");",
+													"    pm.expect(responseJson.description).to.eql(\"Quick notes and links can go here — and files in the comments tab below.👇\");",
+													"    pm.expect(responseJson.completed).to.eql(false);",
+													"}); */",
+													"",
+													"/* pm.test(\"The response fields for requested task contain correct data types\", () => {",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData).to.be.an(\"object\");",
+													"    pm.expect(jsonData.order).to.be.a(\"number\");",
+													"    pm.expect(jsonData.content).to.be.a(\"string\");",
+													"    pm.expect(jsonData.description).to.be.a(\"string\");",
+													"    pm.expect(jsonData.completed).to.be.a(\"boolean\");",
+													"}); */"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' all that are active",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'tasks'",
+													"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Content-Type header is application/json\", () => {",
+													"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "post",
+							"item": [
+								{
+									"name": "'create' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'tasks'",
+													"eval(pm.collectionVariables.get(\"validateSuccessResponse\"))();",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Content-Type header is application/json\", () => {",
+													"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+													"});",
+													"",
+													"pm.test(\"Body is not empty\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});",
+													"",
+													"pm.test(\"The requested task contains all properties and the values match\", () => {",
+													"    const responseJson = pm.response.json();",
+													"    pm.expect(responseJson.content).to.eql(\"Created task for SQA Challenge Fabian\");",
+													"    pm.expect(responseJson.description).to.eql(\"This is a task created after running POST request using Postman for SQA Challenge\");",
+													"    pm.expect(responseJson.completed).to.eql(false);",
+													"});",
+													"",
+													"pm.test(\"The response fields for requested task contain correct data types\", () => {",
+													"    const jsonData = pm.response.json();",
+													"    pm.expect(jsonData).to.be.an(\"object\");",
+													"    pm.expect(jsonData.content).to.be.a(\"string\");",
+													"    pm.expect(jsonData.description).to.be.a(\"string\");",
+													"    pm.expect(jsonData.completed).to.be.a(\"boolean\");",
+													"});",
+													"",
+													"//parse the value of the \"id\" field into a collection variable ",
+													"const jsonResponse = pm.response.json();",
+													"pm.collectionVariables.set(\"task_id\", jsonResponse.id);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"Created task for SQA Challenge Fabian\",\n    \"description\": \"This is a task created after running POST request using Postman for SQA Challenge\",\n    \"completed\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'projects'",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Status code is 204 'No Content'\", () => {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													"pm.test(\"Body is empty\", () =>{",
+													"    pm.response.to.not.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"Updated task for SQA Challenge Fabian\",\n    \"completed\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'close' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'tasks'",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Status code is 204 'No Content'\", () => {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													"pm.test(\"Body is empty\", () => {",
+													"    pm.response.to.not.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}/close",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}",
+												"close"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'reopen' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'tasks'",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Status code is 204 'No Content'\", () => {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													"pm.test(\"Body is empty\", () => {",
+													"    pm.response.to.not.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}/reopen",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}",
+												"reopen"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"item": [
+								{
+									"name": "'delete' one",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//The definition of these tests are in pre-request of current folder 'projects'",
+													"eval(pm.collectionVariables.get(\"validateEnvironment\"))();",
+													"eval(pm.collectionVariables.get(\"validateAuthentication\"))();",
+													"eval(pm.collectionVariables.get(\"validateResponseTime\"))();",
+													"",
+													"pm.test(\"Status code is 204 'No Content'\", () => {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													"pm.test(\"Body is empty\", () => {",
+													"    pm.response.to.not.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "negative tests",
+					"item": [
+						{
+							"name": "get",
+							"item": [
+								{
+									"name": "'get' one sending 'body' response as bad request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'403' status code 'Forbidden'\", () => {",
+													"    pm.response.to.have.status(403);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "dklndklndkln\n480y40948yfi'3fn3\n\nfk;n4klvn34k\nINVALID REQUEST",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' one with an invalid task Id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'task_id is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"task_id is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id_is_invalid}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id_is_invalid}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' all with invalid request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'404' status code 'Not Found'\", () => {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"pm.test(\"Body response message is shown\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/invalid939kl#$@/tasks",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"invalid939kl"
+											],
+											"hash": "$@/tasks"
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'get' all with 'No Auth' access",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'401' status code 'Unauthorized'\", () => {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													"",
+													"pm.test(\"Body response message of 'Forbidden'\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Forbidden\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "post",
+							"item": [
+								{
+									"name": "'update' one with invalid task id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request''\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'task_id is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"task_id is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"Updated task for SQA Challenge Fabian\",\n    \"completed\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_idddd}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_idddd}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one with invalid 'body' format",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"Updated task for SQA Challenge Fabian\",\n    \"completed\": true\n}, kdldklnd\n\n///%%%\\\n;klm\n11234566\n^%$##%&&\n\n{\n    \"dd\": \"22\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'reopen' one task id that does not exist",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'404' status code 'Not Found'\", () => {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Task not found' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Task not found\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/44444332/reopen",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"44444332",
+												"reopen"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'reopen' one with an invalid task id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Task is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Task is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_ffid}}/reopen",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_ffid}}",
+												"reopen"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'create' one with invalid 'body' format",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "lfl;fm;lf\nkdnkldn309u00u\n;kl2v/lkR%^$^#$!!@%",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'create' one with 'No Auth' access",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'401' status code 'Unauthorized'\", () => {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"Created task for SQA Challenge Fabian\",\n    \"description\": \"This is a task created after running POST request using Postman for SQA Challenge\",\n    \"completed\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'close' one with an empty task id request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response message about empty field\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"At least one of supported fields should be set and non-empty\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/close",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"close"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'close' one with an invalid task Id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request''\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Task is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Task is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/jndjdnds/close",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"jndjdnds",
+												"close"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'close'  one task id that does not exist",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'404' status code 'Not Found'\", () => {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Task not found' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Task not found\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/99/close",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"99",
+												"close"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'create' one with invalid request url",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'404' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "lfl;fm;lf\nkdnkldn309u00u\n;kl2v/lkR%^$^#$!!@%",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}/d4094",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}",
+												"d4094"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'update' one task id that does not exist",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"Updated task for SQA Challenge Fabian\",\n    \"completed\": true\n}, kdldklnd\n\n///%%%\\\n;klm\n11234566\n^%$##%&&\n\n{\n    \"dd\": \"22\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_id}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'reopen' one with an empty task id in request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response message about empty field\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"At least one of supported fields should be set and non-empty\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/reopen",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"reopen"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"item": [
+								{
+									"name": "'delete' one with an invalid task id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'400' status code 'Bad Request'\", () => {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Body response contain 'Task is invalid' message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"    pm.expect(pm.response.text()).to.include(\"Task is invalid\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/{{task_iffd}}",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												"{{task_iffd}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "'delete' one with 'body' response",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"'405' status code 'Method Not Allowed'\", () => {",
+													"    pm.response.to.have.status(405);",
+													"});",
+													"",
+													"pm.test(\"Body response contain a string message\", () => {",
+													"    pm.response.to.be.withBody;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \\lmd;ldmldm\n    \";kldkndd: @d.ld.lmd\n}, \n\n\n;lslslsl;\n';ls';lmsl;'ms-03u194=90u55😔5😭😭😭💕"
+										},
+										"url": {
+											"raw": "{{URL-todoist}}/tasks/",
+											"host": [
+												"{{URL-todoist}}"
+											],
+											"path": [
+												"tasks",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//test 1",
+							"let validateSuccessResponse = () => {",
+							"    pm.test(\"Response 'OK' and status 200\", function () {",
+							"        pm.response.to.have.status(200);",
+							"        pm.response.to.be.ok;",
+							"    });",
+							"}",
+							"",
+							"//test 2",
+							"let validateEnvironment = () => {",
+							"    pm.test(\"The active environment is equal to 'todoist'\", () => {",
+							"        pm.expect(pm.environment.name).to.eql(\"todoist\");",
+							"    });",
+							"};",
+							"",
+							"//test 3",
+							"pm.environment.get(\"auth-token\");",
+							"let validateAuthentication = () => {",
+							"    pm.test(\"Check wether it is authenticated request\", function () {",
+							"        pm.sendRequest({",
+							"            url: 'https://api.todoist.com/rest/v1/projects',",
+							"            method: 'GET',",
+							"            header: {",
+							"                'Authorization':  'Bearer ' + '{{auth-token}}'",
+							"            },",
+							"        })",
+							"    });",
+							"}",
+							"",
+							"//test 4",
+							"let validateResponseTime = () => {",
+							"    pm.test(\"Response time is less than 300ms\", function () {",
+							"        pm.expect(pm.response.responseTime).to.be.below(300);",
+							"    });",
+							"}",
+							"",
+							"//Definition of environment variables",
+							"pm.environment.set(\"validateSuccessResponse\", validateSuccessResponse.toString());",
+							"pm.environment.set(\"validateEnvironment\", validateEnvironment.toString());",
+							"pm.environment.set(\"validateAuthentication\", validateAuthentication.toString());",
+							"pm.environment.set(\"validateResponseTime\", validateResponseTime.toString());"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//test 1",
+					"let validateSuccessResponse = () => {",
+					"    pm.test(\"Response 'OK' and status 200\", function () {",
+					"        pm.response.to.have.status(200);",
+					"        pm.response.to.be.ok;",
+					"    });",
+					"}",
+					"",
+					"//test 2",
+					"let validateEnvironment = () => {",
+					"    pm.test(\"The active environment is equal to 'todoist'\", () => {",
+					"        pm.expect(pm.environment.name).to.eql(\"todoist-backend\");",
+					"    });",
+					"};",
+					"",
+					"//test 3",
+					"//let token = pm.environment.get(\"auth-token\");",
+					"let validateAuthentication = () => {",
+					"    pm.test(\"The authorization token is not null and is defined'\", () => {",
+					"            if(`${pm.environment.get(\"auth-token\")}` !== null || `${pm.environment.get(\"auth-token\")}` !== undefined) {",
+					"                console.log('success');",
+					"            } ",
+					"    });",
+					"};",
+					"//TODO: Investigate how to sabe the variable token and put in test",
+					"",
+					"//test 4",
+					"let validateResponseTime = () => {",
+					"    pm.test(\"Response time is less than 450ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(450);",
+					"    });",
+					"}",
+					"",
+					"//Definition of collection variables",
+					"pm.collectionVariables.set(\"validateSuccessResponse\", validateSuccessResponse.toString());",
+					"pm.collectionVariables.set(\"validateEnvironment\", validateEnvironment.toString());",
+					"pm.collectionVariables.set(\"validateAuthentication\", validateAuthentication.toString());",
+					"pm.collectionVariables.set(\"validateResponseTime\", validateResponseTime.toString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "project_id",
+			"value": ""
+		},
+		{
+			"key": "project_id_updt",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "validateSuccessResponse",
+			"value": ""
+		},
+		{
+			"key": "validateEnvironment",
+			"value": ""
+		},
+		{
+			"key": "validateAuthentication",
+			"value": ""
+		},
+		{
+			"key": "validateResponseTime",
+			"value": ""
+		},
+		{
+			"key": "randomInt",
+			"value": ""
+		},
+		{
+			"key": "randomFirstName",
+			"value": ""
+		},
+		{
+			"key": "task_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "task_id_updt",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
