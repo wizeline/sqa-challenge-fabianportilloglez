@@ -21,7 +21,6 @@ pipeline {
             environment {
                 SCANNER_HOME = tool 'SonarQubeScanner'
                 PROJECT_NAME = 'SQA-Challenge'
-                SONAR_KEY= "sttl7lxoXkSP6PnpOyIYwgWT8amQ+cLKtYG9xK/4rwY="
              } 
             steps {
                 echo 'running Sonarqube..'
@@ -31,8 +30,8 @@ pipeline {
                     sh '''
                         ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey="${PROJECT_NAME}" \
-                        -Dsonar.projectKey="${SONAR_KEY}"
-                    '''
+                        -Dsonar.login=admin -Dsonar.login=Shadowops_1                    
+                        '''
                 } //-Dproject.settings=sonar-project.properties
             }
         }
