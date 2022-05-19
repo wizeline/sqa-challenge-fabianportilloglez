@@ -18,13 +18,16 @@ pipeline {
             }
         }
         stage('Static Analysis Sonarqube') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+             } 
             steps {
                 echo 'running Sonarqube..'
-                def scannerHome = tool 'SonarQubeScanner';
                 echo "${scannerHome}"
                 withSonarQubeEnv('SonarQube') {
                     sh 'pwd'
                     sh "${scannerHome}/bin/sonar-scanner"
+                    //-Dproject.settings=sonar-project.properties"  or -Dsonar.projectKey=NAME"
                 }
             }
         }
