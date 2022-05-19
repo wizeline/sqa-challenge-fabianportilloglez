@@ -4,12 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "cy:open": "npx cypress open",
-      "cy:run": "npx cypress run",
-      "cy:run chrome": "npx cypress run --browser chrome",
-      "cy:run firefox": "npx cypress run --browser firefox"
-    }, 
+    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run",
+    "cy:run chrome": "npx cypress run --browser chrome",
+    "clean:reports": "rm -R -f cypress/reports && mkdir cypress/reports && mkdir cypress/reports/mochareports",
+    "pretest": "npm run clean:reports",
+    "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
+    "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
+    "posttest": "npm run combine-reports && npm run generate-report",
+    "test": "npm run scripts || npm run posttest",
+    "eslint": "eslint ./",
+    "backendTests": "newman run ./src/backend/postman/todoist-backend.postman_collection.json -e ./src/backend/postman/todoist-backend.postman_environment.json -r htmlextra --reporter-htmlextra-export ./reports/test_results_report.html"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wizeline/sqa-challenge-fabianportilloglez.git"
@@ -27,11 +33,21 @@
   },
   "homepage": "https://github.com/wizeline/sqa-challenge-fabianportilloglez#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.24.0",
+    "@typescript-eslint/parser": "^5.24.0",
+    "cypress": "^9.6.1",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-dotenv": "^2.0.0",
     "cypress-mochawesome-reporter": "^3.1.0",
+    "cypress-multi-reporters": "^1.6.0",
     "dotenv": "^16.0.1",
-    "eslint": "^8.15.0"
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.26.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.2.0"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
@@ -39,7 +55,6 @@
   "dependencies": {
     "browserstack": "^1.6.1",
     "cli": "^1.0.1",
-    "cypress": "^9.6.1",
     "g": "^2.0.1",
     "newman-reporter-teamcity": "^0.1.12"
   }
