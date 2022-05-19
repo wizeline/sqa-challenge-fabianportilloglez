@@ -6,7 +6,9 @@ pipeline {
         stage('Dependencies') {
             steps {
                 echo 'installing dependencies..'
-                sh 'npm install -g newman-reporter-htmlextra'
+                sh ''' npm install -g newman-reporter-htmlextra /
+                    rm -rf node_modules package-lock.json && npm install
+                '''
             }
         }
         stage('Linting tools') {
@@ -14,9 +16,17 @@ pipeline {
                 echo 'running Eslint..'
             }
         }
-        stage('Static Analysis') {
+        stage('Static Analysis Sonarqube') {
             steps {
                 echo 'running Sonarqube..'
+                withSonarQubeEnv('SonarQube') {
+                sh "./gradlew sonarqube"
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                echo 'running Sonarqube..'
+                waitForQualityGate abortPipeline: true
             }
         }
         stage('Backend') {
