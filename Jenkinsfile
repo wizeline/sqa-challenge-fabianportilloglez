@@ -21,7 +21,10 @@ pipeline {
             steps {
                 echo 'running Sonarqube..'
                 withSonarQubeEnv('SonarQube') {
-                sh "./gradlew sonarqube"
+                sh ''' 
+                    chmod +x gradlew' \
+                    sh './gradlew sonarqube'
+                '''
                 }
             }
         }
