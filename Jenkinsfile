@@ -27,9 +27,11 @@ pipeline {
                 echo "${SCANNER_HOME}"
                 withSonarQubeEnv('SonarQube') {
                     sh 'pwd'
-                    sh "${SCANNER_HOME}/bin/sonar-scanner" \
-                    -Dsonar.projectKey="${PROJECT_NAME}" \
-                    -Dproject.settings=sonar-project.properties
+                    sh '''
+                        ${SCANNER_HOME}/bin/sonar-scanner \
+                        -Dsonar.projectKey="${PROJECT_NAME} \
+                        -Dproject.settings=sonar-project.properties
+                    '''
                 }
             }
         }
