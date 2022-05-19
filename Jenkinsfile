@@ -29,8 +29,7 @@ pipeline {
                     sh 'pwd'
                     sh '''
                         ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey="${PROJECT_NAME}" \
-                        -Dsonar.login=admin -Dsonar.login=Shadowops_1                    
+                        -Dsonar.projectKey="${PROJECT_NAME}" 
                         '''
                 } //-Dproject.settings=sonar-project.properties
             }
