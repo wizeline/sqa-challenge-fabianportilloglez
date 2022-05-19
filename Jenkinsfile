@@ -6,7 +6,8 @@ pipeline {
         stage('Dependencies') {
             steps {
                 echo 'installing dependencies..'
-                sh ''' npm install -g newman-reporter-htmlextra /
+                // npm install -g newman-reporter-htmlextra /
+                sh ''' 
                     rm -rf node_modules package-lock.json && npm install
                 '''
             }
