@@ -20,7 +20,7 @@ pipeline {
         stage('Static Analysis Sonarqube') {
             environment {
                 SCANNER_HOME = tool 'SonarQubeScanner'
-                 PROJECT_NAME = 'SQA-Challenge'
+                PROJECT_NAME = 'SQA-Challenge'
              } 
             steps {
                 echo 'running Sonarqube..'
@@ -29,7 +29,7 @@ pipeline {
                     sh 'pwd'
                     sh '''
                         ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey="${PROJECT_NAME} \
+                        -Dsonar.projectKey="${PROJECT_NAME}" \
                         -Dproject.settings=sonar-project.properties
                     '''
                 }
