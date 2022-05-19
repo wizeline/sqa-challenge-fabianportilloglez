@@ -21,6 +21,7 @@ pipeline {
                 echo 'running Sonarqube..'
                 withSonarQubeEnv('SonarQube') {
                 sh "./gradlew sonarqube"
+                }
             }
         }
         stage('Quality Gate') {
