@@ -6,7 +6,7 @@ pipeline {
         stage('Dependencies') {
             steps {
                 echo 'installing dependencies..'
-                npm install -g newman-reporter-htmlextra
+                sh 'npm install -g newman-reporter-htmlextra'
             }
         }
         stage('Linting tools') {
