@@ -20,7 +20,7 @@ pipeline {
         stage('Static Analysis Sonarqube') {
             steps {
                 echo 'running Sonarqube..'
-                def scannerHome = tool 'SonnarScan 1.0'
+                def scannerHome = tool 'SonnarScan 1.0';
                 echo "${scannerHome}"
                 withSonarQubeEnv('SonarQube') {
                     sh 'pwd'
