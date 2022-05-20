@@ -30,24 +30,6 @@ pipeline {
                         ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey="${PROJECT_NAME}" 
                         '''
-                echo "Quality Gate - Sonarqube"
-                    waitForQualityGate abortPipeline: true
-                } 
-            } 
-        }
-        stage('Static Analysis - Sonarqube') {
-            environment {
-                SCANNER_HOME = tool 'SonarQubeScanner'
-                PROJECT_NAME = 'SQA-Challenge'
-             } 
-            steps {
-                echo 'running Sonarqube..'
-                    echo "${SCANNER_HOME}"
-                    withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey="${PROJECT_NAME}" 
-                        '''
                 } 
             } 
         }
