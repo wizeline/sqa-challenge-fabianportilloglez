@@ -59,6 +59,7 @@ pipeline {
     post {
         success {
             echo 'This will run only if successful'
+            slackSend color: "#11cd4b", message: "*Build Passed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
         }
         failure {
             echo 'This will run only if failed'
