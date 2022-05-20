@@ -15,6 +15,7 @@ pipeline {
         stage('Linting tools - Eslint') {
             steps {
                 echo 'running Eslint..'
+                sh 'npm run lint'
             }
         }
         stage('Static Analysis - Sonarqube') {
@@ -42,7 +43,7 @@ pipeline {
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
-                sh 'npm run backendTests'
+                //sh 'npm run backendTests'
             }
         }
         stage('Performance') {
