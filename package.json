@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open": "npx cypress open",
     "cy:run": "npx cypress run",
-    "lint": "eslint ./ -o ./eslint_reports/eslint-report.html",
+    "lint": "eslint ./",
     "deleteReports": "rm -rf ./backend_reports ./eslint_reports",
     "backendTests": "newman run ./src/backend/postman/todoist-backend.postman_collection.json -e ./src/backend/postman/todoist-backend.postman_environment.json -r htmlextra --reporter-htmlextra-export ./report_results/test_results_report.html"
   },
