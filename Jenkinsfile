@@ -35,6 +35,29 @@ pipeline {
                 } 
             } 
         }
+        stage('Static Analysis - Sonarqube') {
+            environment {
+                SCANNER_HOME = tool 'SonarQubeScanner'
+                PROJECT_NAME = 'SQA-Challenge'
+             } 
+            steps {
+                echo 'running Sonarqube..'
+                    echo "${SCANNER_HOME}"
+                    withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        ${SCANNER_HOME}/bin/sonar-scanner \
+                        -Dsonar.projectKey="${PROJECT_NAME}" 
+                        '''
+                } 
+            } 
+        }
+        stage('Quality Gate - Sonarqube') {
+            steps {
+                echo 'waiting for QualityGate Sonarqube..'
+                    waitForQualityGate abortPipeline: true
+                } 
+            } 
+        }
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
