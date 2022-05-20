@@ -55,9 +55,8 @@ pipeline {
             steps {
                 echo 'waiting for QualityGate Sonarqube..'
                     waitForQualityGate abortPipeline: true
-                } 
             } 
-        }
+        } 
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
