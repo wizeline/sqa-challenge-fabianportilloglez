@@ -55,26 +55,24 @@ pipeline {
                 echo 'running frontend tests...'
             }
         }
-        stage('Send build results Slack'){
-            echo 'sending build results to slack channel'
-            post {
-                success {
-                    echo 'success!'
-                    slackSend color: "#11cd4b", message: "*Build Passed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
-                }
-                failure {
-                    echo 'marked as failure'
-                    slackSend color: "#F50407", message: "*Build Failed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
-                }
-                unstable {
-                    echo 'marked as unstable'
-                    slackSend color: "#df6805", message: "*Build Unstable*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
-                }
-                aborted {
-                    echo 'aborted'
-                    slackSend color: "#f3f024", message: "*Build Aborted*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"        
-                }
-            }
+    }
+    post {
+        echo 'sending build results to Slack channel..'
+        success {
+            echo 'success!'
+            slackSend color: "#11cd4b", message: "*Build Passed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
+        }
+        failure {
+            echo 'marked as failure'
+            slackSend color: "#F50407", message: "*Build Failed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
+        }
+        unstable {
+            echo 'marked as unstable'
+            slackSend color: "#df6805", message: "*Build Unstable*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
+        }
+        aborted {
+            echo 'aborted'
+            slackSend color: "#f3f024", message: "*Build Aborted*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"        
         }
     }
 }
