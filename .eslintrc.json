@@ -1,5 +1,5 @@
 {
-    "env": {
+        "env": {
         "commonjs": true,
         "es2021": true,
         "mocha": true,
@@ -10,15 +10,30 @@
         "airbnb-base",
         "plugin:cypress/recommended"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        } 
     },
     "rules": {
-        //https://eslint.org/docs/user-guide/configuring/rules
-        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"], // https://stackoverflow.com/questions/42226436/how-can-i-turn-off-eslints-no-restricted-syntax-rule-just-for-forofstatement
         "indent": [
-            "error",
-            4
-        ]
+        "warn",
+        4
+    ],
+    "linebreak-style": [
+        "warn",
+        "unix"
+    ],
+    "quotes": [
+        "warn",
+        "single"
+    ],
+    "semi": [
+        "warn",
+        "never"
+    ]
     }
 }
