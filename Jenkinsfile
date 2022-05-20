@@ -1,4 +1,3 @@
-// Declarative //
 pipeline {
     agent any
     tools { nodejs 'nodeJS-SQA' }
@@ -25,25 +24,21 @@ pipeline {
              } 
             steps {
                 echo 'running Sonarqube..'
-                echo "${SCANNER_HOME}"
-                withSonarQubeEnv('SonarQube') {
+                    echo "${SCANNER_HOME}"
+                    withSonarQubeEnv('SonarQube') {
                     sh '''
                         ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey="${PROJECT_NAME}" 
                         '''
+                echo "Quality Gate - Sonarqube"
+                    waitForQualityGate abortPipeline: true
                 } 
             } 
-        }
-        stage('Quality Gate - Sonarqube') {
-            steps {
-                echo 'running Sonarqube..'
-                waitForQualityGate abortPipeline: true
-            }
         }
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
-                sh 'npm run backendTests'
+                //sh 'npm run backendTests'
             }
         }
         stage('Performance') {
@@ -56,5 +51,20 @@ pipeline {
                 echo 'running frontend tests...'
             }
         }
+    post {
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
+    }
     }
 }
