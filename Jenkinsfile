@@ -8,16 +8,18 @@ pipeline {
                 echo 'installing dependencies..'
                 // npm install -g newman-reporter-htmlextra /
                 sh ''' 
+                    pwd \
                     rm -rf node_modules package-lock.json && npm install
+                    rm -rf reports
                 '''
             }
         }
-        stage('Linting tools') {
+        stage('Linting tools - Eslint') {
             steps {
                 echo 'running Eslint..'
             }
         }
-        stage('Static Analysis Sonarqube') {
+        stage('Static Analysis - Sonarqube') {
             environment {
                 SCANNER_HOME = tool 'SonarQubeScanner'
                 PROJECT_NAME = 'SQA-Challenge'
@@ -26,15 +28,14 @@ pipeline {
                 echo 'running Sonarqube..'
                 echo "${SCANNER_HOME}"
                 withSonarQubeEnv('SonarQube') {
-                    sh 'pwd'
                     sh '''
                         ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey="${PROJECT_NAME}" 
                         '''
-                } //-Dproject.settings=sonar-project.properties
+                } 
             } 
         }
-        stage('Quality Gate') {
+        stage('Quality Gate - Sonarqube') {
             steps {
                 echo 'running Sonarqube..'
                 waitForQualityGate abortPipeline: true
