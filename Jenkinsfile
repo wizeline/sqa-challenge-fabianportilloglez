@@ -32,7 +32,7 @@ pipeline {
                         -Dsonar.projectKey="${PROJECT_NAME}" 
                         '''
                 } //-Dproject.settings=sonar-project.properties
-            }
+            } 
         }
         stage('Quality Gate') {
             steps {
