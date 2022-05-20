@@ -42,7 +42,7 @@ pipeline {
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
-                //sh 'npm run backendTests'
+                sh 'npm run backendTests'
             }
         }
         stage('Performance') {
