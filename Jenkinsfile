@@ -55,8 +55,7 @@ pipeline {
                 echo 'running frontend tests...'
             }
         }
-    }
-    stage('Send build results Slack'){
+        stage('Send build results Slack'){
         echo 'sending build results to slack channel'
         post {
             success {
