@@ -57,22 +57,21 @@ pipeline {
         }
     }
     post {
-        echo 'sending build results to Slack channel..'
         success {
             echo 'success!'
-            slackSend color: "#11cd4b", message: "*Build Passed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
+            slackSend color: "#11cd4b", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Passed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
         }
         failure {
             echo 'marked as failure'
-            slackSend color: "#F50407", message: "*Build Failed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
+            slackSend color: "#F50407", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Failed*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
         }
         unstable {
             echo 'marked as unstable'
-            slackSend color: "#df6805", message: "*Build Unstable*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
+            slackSend color: "#df6805", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Unstable*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
         }
         aborted {
             echo 'aborted'
-            slackSend color: "#f3f024", message: "*Build Aborted*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"        
+            slackSend color: "#f3f024", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Aborted*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"        
         }
     }
 }
