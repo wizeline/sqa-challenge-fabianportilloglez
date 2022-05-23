@@ -12,7 +12,8 @@ Thumbs.db
 
 # env variables
 .env
+sonar-project.properties
 
 # testing
-src/cypress/screenshots/
-src/cypress/reports
+src/frontend/cypress/screenshots/
+src/frontend/cypress/reports

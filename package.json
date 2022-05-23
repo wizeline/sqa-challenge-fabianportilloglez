@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open": "npx cypress open",
     "cy:run": "npx cypress run",
-    "lint": "eslint ./",
+    "lint": "eslint ./src",
     "deleteReports": "rm -rf ./backend_reports ./eslint_reports",
     "backendTests": "newman run ./src/backend/postman/todoist-backend.postman_collection.json -e ./src/backend/postman/todoist-backend.postman_environment.json -r htmlextra --reporter-htmlextra-export ./report_results/test_results_report.html"
   },
@@ -40,6 +40,8 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-prettier": "^4.0.0",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.2.1",
     "mochawesome-report-generator": "^6.2.0"
@@ -50,6 +52,7 @@
   "dependencies": {
     "browserstack": "^1.6.1",
     "cli": "^1.0.1",
+    "eslint-config-prettier": "^8.5.0",
     "g": "^2.0.1",
     "newman-reporter-teamcity": "^0.1.12"
   }

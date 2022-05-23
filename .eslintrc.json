@@ -7,22 +7,25 @@
         "shared-node-browser": true
     },
     "extends": [
-        ["airbnb-base", 1],
+        "eslint:recommended",
+        "prettier",
+        "eslint-config-prettier",
         "plugin:cypress/recommended"
+    ],
+    "plugins": [
+        "eslint-plugin-prettier"
     ],
     "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": "latest",
+        "ecmaVersion": 6,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "modules": true
         } 
     },
     "rules": {
-        "indent": [
-        "warn",
-        4
-    ],
+    "prettier/prettier": "warn",
     "linebreak-style": [
         "warn",
         "unix"
