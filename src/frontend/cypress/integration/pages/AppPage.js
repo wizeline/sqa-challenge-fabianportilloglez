@@ -5,6 +5,7 @@ class AppPage {
     }
 
     static writeNameOfTask(taskName) {
+        cy.get('.public-DraftStyleDefault-block').parent('.task_editor__editing_area')
         cy.type(taskName).click();
     }
 

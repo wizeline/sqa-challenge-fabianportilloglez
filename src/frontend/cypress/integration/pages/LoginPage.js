@@ -58,7 +58,7 @@ class LoginPage {
   static exceedNumberOfTriesMessage(password) {
     for (let i = 0; i < password.length; i++) {
         cy.contains('label', 'Password')
-            .type(password[i]+"{enter}",{log:false})
+            .type(password+"{enter}",{log:false})
     }
       cy.contains('Too many login attempts. Try again later.');
   }

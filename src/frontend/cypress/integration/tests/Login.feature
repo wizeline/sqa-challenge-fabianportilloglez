@@ -7,13 +7,11 @@ Feature: Test login
   Background: 
     Given user is in login page
 
-  @focus
   Scenario: Successful login 
     When user fill username "fabian.portillo@wizeline.com"
       And user fill password "Shadowops_1"
       And clicks on log in button
     Then user is in App page
-
 # Negative scenarios - Failed login  
   Scenario: Valid username but invalid password
     When user fill username "fabian.portillo@wizeline.com"
@@ -35,24 +33,12 @@ Feature: Test login
 
   Scenario: Valid username but empty password
     When user fill username "fabian.portillo@wizeline.com"
-      And clicks on log in button
+      And user fill password " "
     Then error message for empty password is displayed "Passwords must be at least 8 characters long."
-  @focus
-  Scenario Outline: Exceed number of tries for failed login
-    When user fill username "fabian.portillo@wizeline.com"
-      And user fill password "<Passwords>"
+
+  Scenario: Exceed number of tries for failed login
+    When user fill username "fabian.portillodl;smmsl;@wizeline.com"
+      And user fill password "lsklslk"
       And clicks on log in button
     Then error message for exceed number of tries is displayed "Too many login attempts. Try again later."
-    Examples:
-        | Passwords | 
-        | password1 | 
-        | password2 | 
-        | password3 | 
-        | password4 | 
-        | password5 | 
-        | password6 | 
-        | password7 | 
-        | password8 | 
-        | password9 | 
-        | password10 | 
-        
+

@@ -1,0 +1,363 @@
+[
+  {
+    "description": "  As a user\n  I want to log in application\n  so that user is logged when fill valid username and password ",
+    "keyword": "Feature",
+    "name": "Test login",
+    "line": 1,
+    "id": "test-login",
+    "tags": [],
+    "uri": "Login.feature",
+    "elements": [
+      {
+        "id": "test-login;successful-login",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Successful login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1024000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "user fill username \"fabian.portillo@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 1435000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "user fill password \"Shadowops_1\"",
+            "result": {
+              "status": "passed",
+              "duration": 283000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 101000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "user is in App page",
+            "result": {
+              "status": "passed",
+              "duration": 2829000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;valid-username-but-invalid-password",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Valid username but invalid password",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 3804000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "user fill username \"fabian.portillo@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 577000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "user fill password \"knlknkln\"",
+            "result": {
+              "status": "passed",
+              "duration": 253000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 107000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "error message for wrong email or password is displayed \"Wrong email or password.\"",
+            "result": {
+              "status": "passed",
+              "duration": 483000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;invalid-username-but-valid-password",
+        "keyword": "Scenario",
+        "line": 22,
+        "name": "Invalid username but valid password",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 2007000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "user fill username \"fabian.portilldd@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 565000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "user fill password \"Shadowops_1\"",
+            "result": {
+              "status": "passed",
+              "duration": 283000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 99000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "error message for wrong email or password is displayed \"Wrong email or password.\"",
+            "result": {
+              "status": "passed",
+              "duration": 296000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;empty-username-but-valid-password",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "Empty username but valid password",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1820000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "user fill username \" \"",
+            "result": {
+              "status": "passed",
+              "duration": 160000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "user fill password \"Shadowops_1\"",
+            "result": {
+              "status": "passed",
+              "duration": 314000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 99000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "error message for empty email is displayed \"Please enter a valid email address.\"",
+            "result": {
+              "status": "passed",
+              "duration": 278000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;valid-username-but-empty-password",
+        "keyword": "Scenario",
+        "line": 34,
+        "name": "Valid username but empty password",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1640000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "user fill username \"fabian.portillo@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 561000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "user fill password \" \"",
+            "result": {
+              "status": "passed",
+              "duration": 151000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 37,
+            "name": "error message for empty password is displayed \"Passwords must be at least 8 characters long.\"",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Passwords must be at least 8 characters long.' but never did.\n    at Function.emptyPasswordMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41833:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41916:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10408:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9729:35)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
+        "keyword": "Scenario",
+        "line": 39,
+        "name": "Exceed number of tries for failed login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 974000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 40,
+            "name": "user fill username \"fabian.portillodl;smmsl;@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 1563000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 41,
+            "name": "user fill password \"lsklslk\"",
+            "result": {
+              "status": "passed",
+              "duration": 234000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 96000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 43,
+            "name": "error message for exceed number of tries is displayed \"Too many login attempts. Try again later.\"",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.exceedNumberOfTriesMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41844:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41919:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10408:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9729:35)"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
