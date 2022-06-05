@@ -1,6 +1,6 @@
 [
   {
-    "description": "  As a user\n  I want to log in application\n  so that user is logged when fill valid username and password ",
+    "description": "  As a user\n  I want to log in todoist website application\n  so that user is logged when fill valid username and valid password ",
     "keyword": "Feature",
     "name": "Test login",
     "line": 1,
@@ -23,27 +23,27 @@
             "name": "user is in login page",
             "result": {
               "status": "passed",
-              "duration": 1024000000
+              "duration": 1315000000
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 11,
-            "name": "user fill username \"fabian.portillo@wizeline.com\"",
+            "name": "user fill username",
             "result": {
-              "status": "passed",
-              "duration": 1435000000
+              "status": "failed",
+              "duration": 16000000,
+              "error_message": "CypressError: `cy.type()` can only accept a string or number. You passed in: `undefined`\n    at Context.type (https://todoist.com/__cypress/runner/cypress_runner.js:158845:76)\n    at Context.<anonymous> (https://todoist.com/__cypress/runner/cypress_runner.js:178437:19)\nFrom Your Spec Code:\n    at Function.fillValidUsername (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41872:37)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41809:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 12,
-            "name": "user fill password \"Shadowops_1\"",
+            "name": "user fill password",
             "result": {
-              "status": "passed",
-              "duration": 283000000
+              "status": "skipped"
             }
           },
           {
@@ -52,8 +52,7 @@
             "line": 13,
             "name": "clicks on log in button",
             "result": {
-              "status": "passed",
-              "duration": 101000000
+              "status": "skipped"
             }
           },
           {
@@ -62,17 +61,16 @@
             "line": 14,
             "name": "user is in App page",
             "result": {
-              "status": "passed",
-              "duration": 2829000000
+              "status": "skipped"
             }
           }
         ]
       },
       {
-        "id": "test-login;valid-username-but-invalid-password",
+        "id": "test-login;invalid-username-or-invalid-password.",
         "keyword": "Scenario",
-        "line": 16,
-        "name": "Valid username but invalid password",
+        "line": 25,
+        "name": "Invalid username or invalid password.",
         "tags": [],
         "type": "scenario",
         "steps": [
@@ -83,116 +81,56 @@
             "name": "user is in login page",
             "result": {
               "status": "passed",
-              "duration": 3804000000
+              "duration": 2248000000
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 17,
+            "line": 18,
             "name": "user fill username \"fabian.portillo@wizeline.com\"",
             "result": {
               "status": "passed",
-              "duration": 577000000
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 18,
-            "name": "user fill password \"knlknkln\"",
-            "result": {
-              "status": "passed",
-              "duration": 253000000
+              "duration": 626000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 19,
-            "name": "clicks on log in button",
+            "name": "user fill password \"WrongPassword\"",
             "result": {
               "status": "passed",
-              "duration": 107000000
+              "duration": 347000000
             }
           },
           {
             "arguments": [],
-            "keyword": "Then ",
+            "keyword": "And ",
             "line": 20,
-            "name": "error message for wrong email or password is displayed \"Wrong email or password.\"",
-            "result": {
-              "status": "passed",
-              "duration": 483000000
-            }
-          }
-        ]
-      },
-      {
-        "id": "test-login;invalid-username-but-valid-password",
-        "keyword": "Scenario",
-        "line": 22,
-        "name": "Invalid username but valid password",
-        "tags": [],
-        "type": "scenario",
-        "steps": [
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "user is in login page",
-            "result": {
-              "status": "passed",
-              "duration": 2007000000
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 23,
-            "name": "user fill username \"fabian.portilldd@wizeline.com\"",
-            "result": {
-              "status": "passed",
-              "duration": 565000000
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 24,
-            "name": "user fill password \"Shadowops_1\"",
-            "result": {
-              "status": "passed",
-              "duration": 283000000
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 25,
             "name": "clicks on log in button",
             "result": {
               "status": "passed",
-              "duration": 99000000
+              "duration": 134000000
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 26,
-            "name": "error message for wrong email or password is displayed \"Wrong email or password.\"",
+            "line": 21,
+            "name": "user see the message \"Wrong email or password.\"",
             "result": {
               "status": "passed",
-              "duration": 296000000
+              "duration": 486000000
             }
           }
         ]
       },
       {
-        "id": "test-login;empty-username-but-valid-password",
+        "id": "test-login;invalid-username-or-invalid-password.",
         "keyword": "Scenario",
-        "line": 28,
-        "name": "Empty username but valid password",
+        "line": 26,
+        "name": "Invalid username or invalid password.",
         "tags": [],
         "type": "scenario",
         "steps": [
@@ -203,56 +141,176 @@
             "name": "user is in login page",
             "result": {
               "status": "passed",
-              "duration": 1820000000
+              "duration": 1116000000
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 29,
-            "name": "user fill username \" \"",
+            "line": 18,
+            "name": "user fill username \"InvalidUser@wizeline.com\"",
             "result": {
               "status": "passed",
-              "duration": 160000000
+              "duration": 540000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 30,
-            "name": "user fill password \"Shadowops_1\"",
+            "line": 19,
+            "name": "user fill password \"WrongPassword\"",
             "result": {
               "status": "passed",
-              "duration": 314000000
+              "duration": 332000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 110000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "user see the message \"Wrong email or password.\"",
+            "result": {
+              "status": "passed",
+              "duration": 92000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;invalid-username-or-invalid-password.",
+        "keyword": "Scenario",
+        "line": 27,
+        "name": "Invalid username or invalid password.",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1274000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "user fill username \"InvalidUser2@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 575000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "user fill password \"{enter}\"",
+            "result": {
+              "status": "passed",
+              "duration": 180000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 112000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "user see the message \"Passwords must be at least 8 characters long.\"",
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
+        "keyword": "Scenario",
+        "line": 37,
+        "name": "Exceed number of tries for failed login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1339000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "user fill username \"InvalidUser1@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 553000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 31,
+            "name": "user fill password \"wrongPassw1\"",
+            "result": {
+              "status": "passed",
+              "duration": 304000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
             "name": "clicks on log in button",
             "result": {
               "status": "passed",
-              "duration": 99000000
+              "duration": 113000000
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 32,
-            "name": "error message for empty email is displayed \"Please enter a valid email address.\"",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
             "result": {
-              "status": "passed",
-              "duration": 278000000
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
             }
           }
         ]
       },
       {
-        "id": "test-login;valid-username-but-empty-password",
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
         "keyword": "Scenario",
-        "line": 34,
-        "name": "Valid username but empty password",
+        "line": 38,
+        "name": "Exceed number of tries for failed login",
         "tags": [],
         "type": "scenario",
         "steps": [
@@ -263,37 +321,47 @@
             "name": "user is in login page",
             "result": {
               "status": "passed",
-              "duration": 1640000000
+              "duration": 1632000000
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 35,
-            "name": "user fill username \"fabian.portillo@wizeline.com\"",
+            "line": 30,
+            "name": "user fill username \"InvalidUser2@wizeline.com\"",
             "result": {
               "status": "passed",
-              "duration": 561000000
+              "duration": 559000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 36,
-            "name": "user fill password \" \"",
+            "line": 31,
+            "name": "user fill password \"wrongPassw2\"",
             "result": {
               "status": "passed",
-              "duration": 151000000
+              "duration": 301000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 110000000
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 37,
-            "name": "error message for empty password is displayed \"Passwords must be at least 8 characters long.\"",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
             "result": {
               "status": "failed",
-              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Passwords must be at least 8 characters long.' but never did.\n    at Function.emptyPasswordMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41833:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41916:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10408:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9729:35)"
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
             }
           }
         ]
@@ -313,47 +381,287 @@
             "name": "user is in login page",
             "result": {
               "status": "passed",
-              "duration": 974000000
+              "duration": 1072000000
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 40,
-            "name": "user fill username \"fabian.portillodl;smmsl;@wizeline.com\"",
+            "line": 30,
+            "name": "user fill username \"InvalidUser3@wizeline.com\"",
             "result": {
               "status": "passed",
-              "duration": 1563000000
+              "duration": 554000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 41,
-            "name": "user fill password \"lsklslk\"",
+            "line": 31,
+            "name": "user fill password \"wrongPassw3\"",
             "result": {
               "status": "passed",
-              "duration": 234000000
+              "duration": 304000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 42,
+            "line": 32,
             "name": "clicks on log in button",
             "result": {
               "status": "passed",
-              "duration": 96000000
+              "duration": 109000000
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 43,
-            "name": "error message for exceed number of tries is displayed \"Too many login attempts. Try again later.\"",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
             "result": {
               "status": "failed",
-              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.exceedNumberOfTriesMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41844:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41919:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10408:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9729:35)"
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
+        "keyword": "Scenario",
+        "line": 40,
+        "name": "Exceed number of tries for failed login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1581000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "user fill username \"InvalidUser4@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 587000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "user fill password \"wrongPassw4\"",
+            "result": {
+              "status": "passed",
+              "duration": 309000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 108000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
+        "keyword": "Scenario",
+        "line": 41,
+        "name": "Exceed number of tries for failed login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 2120000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "user fill username \"InvalidUser5@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 588000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "user fill password \"wrongPassw5\"",
+            "result": {
+              "status": "passed",
+              "duration": 316000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 118000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
+        "keyword": "Scenario",
+        "line": 42,
+        "name": "Exceed number of tries for failed login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 2662000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "user fill username \"InvalidUser6@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 566000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "user fill password \"wrongPassw6\"",
+            "result": {
+              "status": "passed",
+              "duration": 307000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 119000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "test-login;exceed-number-of-tries-for-failed-login",
+        "keyword": "Scenario",
+        "line": 43,
+        "name": "Exceed number of tries for failed login",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is in login page",
+            "result": {
+              "status": "passed",
+              "duration": 1247000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "user fill username \"InvalidUser7@wizeline.com\"",
+            "result": {
+              "status": "passed",
+              "duration": 573000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "user fill password \"wrongPassw7\"",
+            "result": {
+              "status": "passed",
+              "duration": 298000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "clicks on log in button",
+            "result": {
+              "status": "passed",
+              "duration": 108000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "user see the message \"Too many login attempts. Try again later.\"",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Too many login attempts. Try again later.' but never did.\n    at Function.showMessage (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41914:10)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:41824:25)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:10425:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/Login.feature:9746:35)"
             }
           }
         ]

@@ -1,44 +1,43 @@
 Feature: Test login 
 
   As a user
-  I want to log in application
-  so that user is logged when fill valid username and password 
+  I want to log in todoist website application
+  so that user is logged when fill valid username and valid password 
 
   Background: 
     Given user is in login page
 
   Scenario: Successful login 
-    When user fill username "fabian.portillo@wizeline.com"
-      And user fill password "Shadowops_1"
+    When user fill username
+      And user fill password 
       And clicks on log in button
     Then user is in App page
-# Negative scenarios - Failed login  
-  Scenario: Valid username but invalid password
-    When user fill username "fabian.portillo@wizeline.com"
-      And user fill password "knlknkln"
+
+# Negative scenarios
+  Scenario Outline: Invalid username or invalid password.
+    When user fill username "<User>"
+      And user fill password "<Password>"
       And clicks on log in button
-    Then error message for wrong email or password is displayed "Wrong email or password."
+    Then user see the message "<Message>"
 
-  Scenario: Invalid username but valid password
-    When user fill username "fabian.portilldd@wizeline.com"
-      And user fill password "Shadowops_1"
+      Examples:
+        | User                          | Password      | Message |
+        | fabian.portillo@wizeline.com  | WrongPassword | Wrong email or password. |
+        | InvalidUser@wizeline.com      | WrongPassword | Wrong email or password. |
+        | InvalidUser2@wizeline.com     | {enter}       | Passwords must be at least 8 characters long. |
+
+  Scenario Outline: Exceed number of tries for failed login
+    When user fill username "<User>"
+      And user fill password "<Password>"
       And clicks on log in button
-    Then error message for wrong email or password is displayed "Wrong email or password."
+    Then user see the message "Too many login attempts. Try again later."
 
-  Scenario: Empty username but valid password
-    When user fill username " "
-      And user fill password "Shadowops_1"
-      And clicks on log in button
-    Then error message for empty email is displayed "Please enter a valid email address."
-
-  Scenario: Valid username but empty password
-    When user fill username "fabian.portillo@wizeline.com"
-      And user fill password " "
-    Then error message for empty password is displayed "Passwords must be at least 8 characters long."
-
-  Scenario: Exceed number of tries for failed login
-    When user fill username "fabian.portillodl;smmsl;@wizeline.com"
-      And user fill password "lsklslk"
-      And clicks on log in button
-    Then error message for exceed number of tries is displayed "Too many login attempts. Try again later."
-
+      Examples:
+        | User                        | Password    |
+        | InvalidUser1@wizeline.com   | wrongPassw1 |
+        | InvalidUser2@wizeline.com   | wrongPassw2 |
+        | InvalidUser3@wizeline.com   | wrongPassw3 |
+        | InvalidUser4@wizeline.com   | wrongPassw4 |
+        | InvalidUser5@wizeline.com   | wrongPassw5 |
+        | InvalidUser6@wizeline.com   | wrongPassw6 |
+        | InvalidUser7@wizeline.com   | wrongPassw7 |
