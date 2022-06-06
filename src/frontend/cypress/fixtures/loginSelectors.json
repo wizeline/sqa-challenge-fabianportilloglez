@@ -1,0 +1,5 @@
+{
+    "usernameInputText": "#labeled-input-1",
+    "passwordInputText": "#labeled-input-3",
+    "loginButton": "[data-gtm-id='start-email-login"
+}

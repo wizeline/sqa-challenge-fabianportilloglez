@@ -1,0 +1,100 @@
+[
+  {
+    "description": "  As a user\n  I want to add tasks in app page\n  so that tasks are shown once are added",
+    "keyword": "Feature",
+    "name": "Test add tasks",
+    "line": 1,
+    "id": "test-add-tasks",
+    "tags": [],
+    "uri": "App.feature",
+    "elements": [
+      {
+        "id": "test-add-tasks;create-a-single-task-and-validate-it-was-created-correctly",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Create a single task and validate it was created correctly",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "user is logged in",
+            "result": {
+              "status": "passed",
+              "duration": 4891000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "user is in App page",
+            "result": {
+              "status": "passed",
+              "duration": 2657000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "user click on add task button",
+            "result": {
+              "status": "passed",
+              "duration": 166000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "user select the due date for today",
+            "result": {
+              "status": "failed",
+              "duration": 4330000000,
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[data-track='scheduler|date_shortcut_today']`, but never found it.\n    at Function.selectDueDate (https://todoist.com/__cypress/tests?p=cypress/integration/tests/App.feature:41875:12)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/App.feature:41830:23)\n    at Context.resolveAndRunStepDefinition (https://todoist.com/__cypress/tests?p=cypress/integration/tests/App.feature:10408:29)\n    at Context.eval (https://todoist.com/__cypress/tests?p=cypress/integration/tests/App.feature:9729:35)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "user write some name for the task 'Finish the SQA Challenge'",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "user click on add task button",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "the added task should be visible",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "task is moved to inbox",
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
