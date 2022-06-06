@@ -28,16 +28,10 @@ Feature: Test login
 
   Scenario Outline: Exceed number of tries for failed login
     When user fill username "<User>"
-      And user fill password "<Password>"
-      And clicks on log in button
+      And user fill password 
+      And clicks on log in button multiple times
     Then user see the message "Too many login attempts. Try again later."
 
       Examples:
-        | User                        | Password    |
-        | InvalidUser1@wizeline.com   | wrongPassw1 |
-        | InvalidUser2@wizeline.com   | wrongPassw2 |
-        | InvalidUser3@wizeline.com   | wrongPassw3 |
-        | InvalidUser4@wizeline.com   | wrongPassw4 |
-        | InvalidUser5@wizeline.com   | wrongPassw5 |
-        | InvalidUser6@wizeline.com   | wrongPassw6 |
-        | InvalidUser7@wizeline.com   | wrongPassw7 |
+        | User                       | Password      |
+        | InvalidUser@wizeline.com   | WrongPassword |
