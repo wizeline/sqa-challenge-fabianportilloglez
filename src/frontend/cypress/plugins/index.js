@@ -8,9 +8,9 @@ require('dotenv').config({
 const cucumber = require('cypress-cucumber-preprocessor').default;
 
 module.exports = (on, config) => {
+  require('cypress-mochawesome-reporter/plugin')(on);
   config.env.CY_USERNAME = process.env.CY_USERNAME;
   config.env.CY_PASSWORD = process.env.CY_PASSWORD;
-  require('cypress-mochawesome-reporter/plugin')(on);
   on('file:preprocessor', cucumber())
 
   return config;
