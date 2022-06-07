@@ -1,11 +1,17 @@
+/// <reference types="cypress" />
+
 //const reporter = require('cypress-mochawesome-reporter/plugin');
-const cucumber = require('cypress-cucumber-preprocessor').default
-const dotenvPlugin = require('cypress-dotenv');
+const path = require("path");
+require('dotenv').config({
+  path: path.join(__dirname, "..", "..", "..", "..", ".env"),
+});
+const cucumber = require('cypress-cucumber-preprocessor').default;
 
 module.exports = (on, config) => {
-  //rep = reporter(on);
-  on('file:preprocessor', cucumber())  
-  config = dotenvPlugin(config)
+  require('cypress-mochawesome-reporter/plugin')(on);
+  config.env.CY_USERNAME = process.env.CY_USERNAME;
+  config.env.CY_PASSWORD = process.env.CY_PASSWORD;
+  on('file:preprocessor', cucumber())
 
   return config;
 }

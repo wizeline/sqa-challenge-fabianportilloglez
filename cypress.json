@@ -1,8 +1,18 @@
 {
     "baseUrl": "https://todoist.com/",
-    "testFiles": "*/.{feature,features}",
-    "ignoreTestFiles": "**/*spec.{js,jsx,ts,tsx}",
+    "testFiles": "**/*.feature",
     "viewportHeight": 768,
     "viewportWidth": 1024,
-    "video": false
+    "video": false,
+    "reporter": "cypress-mochawesome-reporter",
+    "reporterOptions": {
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+            "reportDir": "cypress/reports/mocha",
+            "quite": true,
+            "overwrite": false,
+            "html": false,
+            "json": true
+        }
+    }
 }
