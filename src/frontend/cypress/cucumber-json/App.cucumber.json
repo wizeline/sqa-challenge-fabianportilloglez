@@ -23,7 +23,7 @@
             "name": "user is logged in",
             "result": {
               "status": "passed",
-              "duration": 4373000000
+              "duration": 7372000000
             }
           },
           {
@@ -33,7 +33,7 @@
             "name": "user is in App page",
             "result": {
               "status": "passed",
-              "duration": 3699000000
+              "duration": 3342000000
             }
           },
           {
@@ -43,7 +43,7 @@
             "name": "user click on add task button",
             "result": {
               "status": "passed",
-              "duration": 152000000
+              "duration": 172000000
             }
           },
           {
@@ -53,7 +53,7 @@
             "name": "user select the due date for today",
             "result": {
               "status": "passed",
-              "duration": 164000000
+              "duration": 144000000
             }
           },
           {
@@ -63,7 +63,7 @@
             "name": "user write some name for the task 'Finish the SQA Challenge'",
             "result": {
               "status": "passed",
-              "duration": 617000000
+              "duration": 638000000
             }
           },
           {
@@ -73,7 +73,7 @@
             "name": "user click on add task button to submit",
             "result": {
               "status": "passed",
-              "duration": 139000000
+              "duration": 409000000
             }
           },
           {
@@ -83,7 +83,7 @@
             "name": "the added task should be visible",
             "result": {
               "status": "passed",
-              "duration": 109000000
+              "duration": 807000000
             }
           },
           {
@@ -93,7 +93,7 @@
             "name": "task is deleted",
             "result": {
               "status": "passed",
-              "duration": 577000000
+              "duration": 1157000000
             }
           }
         ]
@@ -113,7 +113,7 @@
             "name": "user is logged in",
             "result": {
               "status": "passed",
-              "duration": 2930000000
+              "duration": 2900000000
             }
           },
           {
@@ -123,7 +123,7 @@
             "name": "user is in App page",
             "result": {
               "status": "passed",
-              "duration": 2777000000
+              "duration": 2511000000
             }
           },
           {
@@ -133,7 +133,7 @@
             "name": "user create 10 tasks",
             "result": {
               "status": "passed",
-              "duration": 6000000
+              "duration": 23562000000
             }
           },
           {
@@ -143,7 +143,7 @@
             "name": "all the 10 tasks are created on today site",
             "result": {
               "status": "passed",
-              "duration": 182000000
+              "duration": 1626000000
             }
           }
         ]
