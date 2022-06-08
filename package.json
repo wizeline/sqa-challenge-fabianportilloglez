@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "cy:open": "npx cypress open",
-      "cy:run": "npx cypress run",
-      "cy:run chrome": "npx cypress run --browser chrome",
-      "cy:run firefox": "npx cypress run --browser firefox"
-    }, 
+    "cy:open": "cypress open --config-file ./src/frontend/cypress.json",
+    "cy:run": "npx cypress run --config-file ./src/frontend/cypress.json",
+    "merge": "mochawesome-`merge cypress/reports/*.json > cypress/reports/output.json",
+    "lint": "eslint ./src",
+    "deleteReports": "rm -rf ./backend_reports ./eslint_reports",
+    "backendTests": "newman run ./src/backend/postman/todoist-backend.postman_collection.json -e ./src/backend/postman/todoist-backend.postman_environment.json -r htmlextra --reporter-htmlextra-export ./report_results/test_results_report.html"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wizeline/sqa-challenge-fabianportilloglez.git"
@@ -27,19 +28,32 @@
   },
   "homepage": "https://github.com/wizeline/sqa-challenge-fabianportilloglez#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "babel-eslint": "^8.2.6",
+    "cypress": "^9.6.1",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-dotenv": "^2.0.0",
     "cypress-mochawesome-reporter": "^3.1.0",
     "dotenv": "^16.0.1",
-    "eslint": "^8.15.0"
-  },
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^10.0.0"
+    },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true
+    }
   },
   "dependencies": {
     "browserstack": "^1.6.1",
     "cli": "^1.0.1",
-    "cypress": "^9.6.1",
+    "eslint-config-prettier": "^8.5.0",
     "g": "^2.0.1",
     "newman-reporter-teamcity": "^0.1.12"
   }

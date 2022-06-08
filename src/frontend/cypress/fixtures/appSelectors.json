@@ -1,0 +1,10 @@
+{
+    "createNewTaskButton":"button[data-add-task-navigation-element]",
+    "titleTaskTextbox":".public-DraftStyleDefault-block",
+    "dueDateSelector":".item_due_selector > .date",
+    "optionOfTodaySelector":"[data-track='scheduler|date_shortcut_today']",
+    "addTaskButton":"button[data-testid='task-editor-submit-button'] > ._09c23660",
+    "viewOfTodayAgenda":"#agenda_view",
+    "goToInboxButton":"#filter_inbox",
+    "viewOfInboxAgenda":".project_view"
+}

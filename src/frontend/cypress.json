@@ -1,19 +1,21 @@
 {
     "baseUrl": "https://todoist.com/",
-    "testFiles": "*/.{feature,features}",
-    "ignoreTestFiles": "**/*spec.{js,jsx,ts,tsx}",
+    "fixturesFolder": "cypress/fixtures",
+    "reportsFolder": "./src/frontend/cypress/reports",
+    "screenshotsFolder": "src/frontend/cypress/reports/screenshots",
+    "integrationFolder": "cypress/integration/",
+    "pluginsFile": "cypress/plugins/",
+    "testFiles": "**/*.feature",
     "viewportHeight": 768,
     "viewportWidth": 1024,
     "video": false,
-    "reporter": "cypress-multi-reporters",
+    "screenshotOnRunFailure": true,
+    "reporter": "cypress-mochawesome-reporter",
     "reporterOptions": {
-        "reporterEnabled": "mochawesome",
-        "mochawesomeReporterOptions": {
-            "reportDir": "cypress/reports/mocha",
-            "quite": true,
-            "overwrite": false,
-            "html": false,
-            "json": true
+            "reportDir": "./src/frontend/cypress/reports",
+            "charts": true,   
+            "reportPageTitle": "Test todoist SQA Challenge",
+            "reportFilename": "report-results",
+            "embeddedScreenshots": true
         }
     }
-}

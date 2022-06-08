@@ -1,5 +1,5 @@
 {
-    "env": {
+        "env": {
         "commonjs": true,
         "es2021": true,
         "mocha": true,
@@ -7,18 +7,36 @@
         "shared-node-browser": true
     },
     "extends": [
-        "airbnb-base",
+        "eslint:recommended",
+        "prettier",
+        "eslint-config-prettier",
         "plugin:cypress/recommended"
     ],
+    "plugins": [
+        "eslint-plugin-prettier"
+    ],
+    "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true
+        } 
     },
     "rules": {
-        //https://eslint.org/docs/user-guide/configuring/rules
-        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"], // https://stackoverflow.com/questions/42226436/how-can-i-turn-off-eslints-no-restricted-syntax-rule-just-for-forofstatement
-        "indent": [
-            "error",
-            4
-        ]
+    "prettier/prettier": "warn",
+    "linebreak-style": [
+        "warn",
+        "unix"
+    ],
+    "quotes": [
+        "warn",
+        "single"
+    ],
+    "semi": [
+        "warn",
+        "never"
+    ]
     }
 }
