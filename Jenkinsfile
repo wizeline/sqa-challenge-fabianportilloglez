@@ -43,18 +43,13 @@ pipeline {
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
-                //sh 'npm run backendTests'
-            }
-        }
-        stage('Performance') {
-            steps {
-                echo 'running performance tests...'
+                sh 'npm run backendTests'
             }
         }
         stage('Frontend') {
             steps {
                 echo 'running frontend tests...'
-                sh 'npm run frontendTests'
+                //sh 'npm run frontendTests'
             }
         }
     }
