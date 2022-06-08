@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "3bf0e8d6-e9ed-47e1-9c1a-37143c13c0ac",
 		"name": "todoist-backend",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20854583"
 	},
 	"item": [
 		{
@@ -267,6 +268,567 @@
 							"name": "delete",
 							"item": [
 								{
+									"name": "negative tests",
+									"item": [
+										{
+											"name": "get",
+											"item": [
+												{
+													"name": "'get' all with invalid request for project id",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'404' status code 'Not Found'\", () => {",
+																	"    pm.response.to.have.status(404);",
+																	"});",
+																	"",
+																	"pm.test(\"404 Message is displayed in response\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"    pm.expect(pm.response.text()).to.include(\"Not found\");",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": ""
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/nvalid939kl#$@",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"nvalid939kl"
+															],
+															"hash": "$@"
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'get' one sending 'body' response as bad request",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'403' status code 'Forbidden'\", () => {",
+																	"    pm.response.to.have.status(403);",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "dklndklndkln\n480y40948yfi'3fn3\n\nfk;n4klvn34k\nINVALID REQUEST"
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/123",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"123"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'get' all with 'No Auth' access",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'401' status code 'Unauthorized'\", () => {",
+																	"    pm.response.to.have.status(401);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain a string message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "noauth"
+														},
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{URL-todoist}}/projects/{{task_id_this_is_invalid}}",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"{{task_id_this_is_invalid}}"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'get' one with an invalid project id",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'404' status code 'Bad Request'\", () => {",
+																	"    pm.response.to.have.status(404);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain 'Not found' message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"    pm.expect(pm.response.text()).to.include(\"Not found\");",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": ""
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/123d333$$$##",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"123d333$$$"
+															],
+															"hash": "#"
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "post",
+											"item": [
+												{
+													"name": "'create' one with invalid 'body' format",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'400' status code 'Bad Request'\", () => {",
+																	"    pm.response.to.have.status(400);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain a string message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"protocolProfileBehavior": {
+														"disabledSystemHeaders": {
+															"content-type": true
+														}
+													},
+													"request": {
+														"auth": {
+															"type": "noauth"
+														},
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n},\n{}DLD;LM;L\nCKQWNC\nDKCNWLKRNC\n3983938983",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'update' one with invalid 'body' format",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'400' status code 'Bad Request'\", () => {",
+																	"    pm.response.to.have.status(400);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain a string message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n},\n{DKLMKLDMKLD\n48891Y8Y2\n4R124 43 []}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/{{project_id}}",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"{{project_id}}"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'update' one with invalid project id",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'400' status code 'Bad Request''\", () => {",
+																	"    pm.response.to.have.status(400);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain 'task_id is invalid' message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"    pm.expect(pm.response.text()).to.include(\"project_id is invalid\");",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/{{project_id';,d'd,_INVALID}}",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"{{project_id';,d'd,_INVALID}}"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'create' one with 'No Auth' access",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'401' status code 'Unauthorized'\", () => {",
+																	"    pm.response.to.have.status(401);",
+																	"});",
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"protocolProfileBehavior": {
+														"disabledSystemHeaders": {
+															"content-type": true
+														}
+													},
+													"request": {
+														"auth": {
+															"type": "noauth"
+														},
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'update' one task id that does not exist",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'400' status code 'Bad Request'\", () => {",
+																	"    pm.response.to.have.status(400);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain a string message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n},\n{DKLMKLDMKLD\n48891Y8Y2\n4R124 43 []}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/D;LMD;LMD",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"D;LMD;LMD"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "delete",
+											"item": [
+												{
+													"name": "'delete' one with an invalid task id",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'400' status code 'Bad Request'\", () => {",
+																	"    pm.response.to.have.status(400);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain 'Task is invalid' message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"    pm.expect(pm.response.text()).to.include(\"project_id is invalid\");",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/{{project_id_48933ynddj_INVALID}}",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"{{project_id_48933ynddj_INVALID}}"
+															],
+															"query": [
+																{
+																	"key": "",
+																	"value": "",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "'delete' one with 'body' response",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"'400' status code 'Bad Request'\", () => {",
+																	"    pm.response.to.have.status(400);",
+																	"});",
+																	"",
+																	"pm.test(\"Body response contain a string message\", () => {",
+																	"    pm.response.to.be.withBody;",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "c,';we,v';$R\n\n4xrf34f2f💕❤️😂8😂😏😁😂😏x\nl;ml;lm;",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{URL-todoist}}/projects/{{project_id}}",
+															"host": [
+																"{{URL-todoist}}"
+															],
+															"path": [
+																"projects",
+																"{{project_id}}"
+															],
+															"query": [
+																{
+																	"key": "",
+																	"value": "",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										}
+									]
+								},
+								{
 									"name": "'delete' one",
 									"event": [
 										{
@@ -296,567 +858,6 @@
 										"body": {
 											"mode": "raw",
 											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/{{project_id}}",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"{{project_id}}"
-											],
-											"query": [
-												{
-													"key": "",
-													"value": "",
-													"disabled": true
-												}
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "negative tests",
-					"item": [
-						{
-							"name": "get",
-							"item": [
-								{
-									"name": "'get' all with invalid request for project id",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'404' status code 'Not Found'\", () => {",
-													"    pm.response.to.have.status(404);",
-													"});",
-													"",
-													"pm.test(\"404 Message is displayed in response\", () => {",
-													"    pm.response.to.be.withBody;",
-													"    pm.expect(pm.response.text()).to.include(\"Not found\");",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/nvalid939kl#$@",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"nvalid939kl"
-											],
-											"hash": "$@"
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'get' one sending 'body' response as bad request",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'403' status code 'Forbidden'\", () => {",
-													"    pm.response.to.have.status(403);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "dklndklndkln\n480y40948yfi'3fn3\n\nfk;n4klvn34k\nINVALID REQUEST"
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/123",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"123"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'get' all with 'No Auth' access",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'401' status code 'Unauthorized'\", () => {",
-													"    pm.response.to.have.status(401);",
-													"});",
-													"",
-													"pm.test(\"Body response contain a string message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"auth": {
-											"type": "noauth"
-										},
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{URL-todoist}}/projects/{{task_id_this_is_invalid}}",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"{{task_id_this_is_invalid}}"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'get' one with an invalid project id",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'404' status code 'Bad Request'\", () => {",
-													"    pm.response.to.have.status(404);",
-													"});",
-													"",
-													"pm.test(\"Body response contain 'Not found' message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"    pm.expect(pm.response.text()).to.include(\"Not found\");",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/123d333$$$##",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"123d333$$$"
-											],
-											"hash": "#"
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "post",
-							"item": [
-								{
-									"name": "'create' one with invalid 'body' format",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'400' status code 'Bad Request'\", () => {",
-													"    pm.response.to.have.status(400);",
-													"});",
-													"",
-													"pm.test(\"Body response contain a string message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {
-											"content-type": true
-										}
-									},
-									"request": {
-										"auth": {
-											"type": "noauth"
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n},\n{}DLD;LM;L\nCKQWNC\nDKCNWLKRNC\n3983938983",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'update' one with invalid 'body' format",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'400' status code 'Bad Request'\", () => {",
-													"    pm.response.to.have.status(400);",
-													"});",
-													"",
-													"pm.test(\"Body response contain a string message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n},\n{DKLMKLDMKLD\n48891Y8Y2\n4R124 43 []}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/{{project_id}}",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"{{project_id}}"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'update' one with invalid project id",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'400' status code 'Bad Request''\", () => {",
-													"    pm.response.to.have.status(400);",
-													"});",
-													"",
-													"pm.test(\"Body response contain 'task_id is invalid' message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"    pm.expect(pm.response.text()).to.include(\"project_id is invalid\");",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/{{project_id';,d'd,_INVALID}}",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"{{project_id';,d'd,_INVALID}}"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'create' one with 'No Auth' access",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'401' status code 'Unauthorized'\", () => {",
-													"    pm.response.to.have.status(401);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disabledSystemHeaders": {
-											"content-type": true
-										}
-									},
-									"request": {
-										"auth": {
-											"type": "noauth"
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"New project SQA challenge Fabian\",\n    \"comment_count\": 0,\n    \"color\": 40,\n    \"shared\": false,\n    \"sync_id\": 0,\n    \"order\": 1,\n    \"favorite\": true\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'update' one task id that does not exist",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'400' status code 'Bad Request'\", () => {",
-													"    pm.response.to.have.status(400);",
-													"});",
-													"",
-													"pm.test(\"Body response contain a string message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"name\": \"Updated project SQA challenge Fabian\",\n    \"color\": 35,\n    \"favorite\": false\n},\n{DKLMKLDMKLD\n48891Y8Y2\n4R124 43 []}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/D;LMD;LMD",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"D;LMD;LMD"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "delete",
-							"item": [
-								{
-									"name": "'delete' one with an invalid task id",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'400' status code 'Bad Request'\", () => {",
-													"    pm.response.to.have.status(400);",
-													"});",
-													"",
-													"pm.test(\"Body response contain 'Task is invalid' message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"    pm.expect(pm.response.text()).to.include(\"project_id is invalid\");",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "DELETE",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{URL-todoist}}/projects/{{project_id_48933ynddj_INVALID}}",
-											"host": [
-												"{{URL-todoist}}"
-											],
-											"path": [
-												"projects",
-												"{{project_id_48933ynddj_INVALID}}"
-											],
-											"query": [
-												{
-													"key": "",
-													"value": "",
-													"disabled": true
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "'delete' one with 'body' response",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"'400' status code 'Bad Request'\", () => {",
-													"    pm.response.to.have.status(400);",
-													"});",
-													"",
-													"pm.test(\"Body response contain a string message\", () => {",
-													"    pm.response.to.be.withBody;",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "DELETE",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "c,';we,v';$R\n\n4xrf34f2f💕❤️😂8😂😏😁😂😏x\nl;ml;lm;",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -2156,8 +2157,8 @@
 					"",
 					"//test 4",
 					"let validateResponseTime = () => {",
-					"    pm.test(\"Response time is less than 450ms\", function () {",
-					"        pm.expect(pm.response.responseTime).to.be.below(450);",
+					"    pm.test(\"Response time is less than 700ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(700);",
 					"    });",
 					"}",
 					"",
