@@ -9,7 +9,7 @@
     "lint": "eslint ./src",
     "deleteReports": "rm -rf ./backend_reports ./eslint_reports",
     "frontendTests": "npx cypress run --config-file ./src/frontend/cypress.json",
-    "backendTests": "newman run ./src/backend/postman/todoist-backend.postman_collection.json -e ./src/backend/postman/todoist-backend.postman_environment.json -r htmlextra --reporter-htmlextra-export ./report_results/test_results_report.html"
+    "backendTests": "newman run todoist-backend.postman_collection.json -e todoist-backend.postman_environment.json"
   },
   "repository": {
     "type": "git",
