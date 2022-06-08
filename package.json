@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open --config-file ./src/frontend/cypress.json",
-    "cy:run": "npx cypress run --config-file ./src/frontend/cypress.json",
     "merge": "mochawesome-`merge cypress/reports/*.json > cypress/reports/output.json",
     "lint": "eslint ./src",
     "deleteReports": "rm -rf ./backend_reports ./eslint_reports",
+    "frontendTests": "npx cypress run --config-file ./src/frontend/cypress.json",
     "backendTests": "newman run ./src/backend/postman/todoist-backend.postman_collection.json -e ./src/backend/postman/todoist-backend.postman_environment.json -r htmlextra --reporter-htmlextra-export ./report_results/test_results_report.html"
   },
   "repository": {
@@ -48,7 +48,8 @@
     "nonGlobalStepDefinitions": true,
     "cucumberJson": {
       "generate": true
-    }
+    },
+    "step_definitions": "./src/frontend/cypress/integration"
   },
   "dependencies": {
     "browserstack": "^1.6.1",
