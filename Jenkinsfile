@@ -49,7 +49,7 @@ pipeline {
         stage('Frontend') {
             steps {
                 echo 'running frontend tests...'
-                //sh 'npm run frontendTests'
+                //sh 'npm run frontendTests' 
             }
         }
     }
