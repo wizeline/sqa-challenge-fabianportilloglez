@@ -16,4 +16,4 @@ sonar-project.properties
 
 # testing
 src/frontend/cypress/screenshots/
-src/frontend/cypress
+src/frontend/cypress/reports

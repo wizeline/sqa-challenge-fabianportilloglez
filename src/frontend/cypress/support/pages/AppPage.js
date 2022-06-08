@@ -18,6 +18,7 @@ class AppPage {
       
     static clickOnAddTask() {
         cy.get(app.addTaskButton).click( {force: true} )
+        cy.reload();
     }
     
     static validateTaskWasCreated() {
@@ -36,23 +37,13 @@ class AppPage {
     } 
 
     //Multiple task
-    static typeMultiTaskName(Number) {
-        for (let i = 1; i <= Number; i++) {
-            AppPage.clickOnCreateNewTask()
-            cy.get(app.titleTaskTextbox).type("test task " + i);
-            AppPage.selectDueDate()
-            AppPage.clickOnAddTask()
-        }
+    static typeMultiTaskName() {
+        return cy.get(app.titleTaskTextbox);
   }
 
     static validateMultiTaskToday() {
-        cy.get(app.viewOfTodayAgenda)
+       return cy.get(app.viewOfTodayAgenda)
     }
-
-/*     static deleteMultiTasks(task) {
-        cy.get(app.goToInboxButton).click()
-        cy.get(app.viewOfInboxAgenda)
-    } */
 
 }
 
