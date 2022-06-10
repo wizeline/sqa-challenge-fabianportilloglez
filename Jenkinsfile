@@ -43,17 +43,13 @@ pipeline {
         stage('Backend') {
             steps {
                 echo 'running backend tests...'
-                //sh 'npm run backendTests'
-            }
-        }
-        stage('Performance') {
-            steps {
-                echo 'running performance tests...'
+                sh 'npm run backendTests'
             }
         }
         stage('Frontend') {
             steps {
                 echo 'running frontend tests...'
+                //sh 'npm run frontendTests' 
             }
         }
     }
@@ -70,9 +66,9 @@ pipeline {
             echo 'marked as unstable'
             slackSend color: "#df6805", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Unstable*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"
         }
-        aborted {
+        aborted { 
             echo 'aborted'
             slackSend color: "#f3f024", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Aborted*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"        
         }
     }
-} 
+}   
