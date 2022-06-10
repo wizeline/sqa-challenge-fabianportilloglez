@@ -71,4 +71,4 @@ pipeline {
             slackSend color: "#f3f024", channel: "#sqa-challenge-fabianpg-notif", message: "*Build Aborted*\n Job: ${env.JOB_NAME}\n Build: ${env.BUILD_NUMBER}\n URL: ${env.BUILD_URL}"        
         }
     }
-} 
+}  
